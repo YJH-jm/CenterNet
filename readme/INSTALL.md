@@ -16,10 +16,9 @@ After install Anaconda:
     conda activate CenterNet
     ~~~
 
-1. Install pytorch0.4.1:
+1. Install pytorch:
 
     ~~~
-    conda install pytorch=0.4.1 torchvision -c pytorch
     pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
     ~~~
     
@@ -78,8 +77,8 @@ After install Anaconda:
 
     ~~~
     rm -rf $CenterNet_ROOT/src/lib/models/networks/DCNv2
-    cd $CenterNet_ROOT/src/lib/models/networks/DCNv2
-    git clone https://github.com/lucasjinreal/DCNv2_latest.git DCNv
+    cd $CenterNet_ROOT/src/lib/models/networks/
+    git clone https://github.com/lucasjinreal/DCNv2_latest.git DCNv2
     python3 setup.py build develop
     ~~~
 6. [Optional, only required if you are using extremenet or multi-scale testing] Compile NMS if your want to use multi-scale testing or test ExtremeNet.
