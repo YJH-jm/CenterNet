@@ -8,6 +8,7 @@ After install Anaconda:
 
     ~~~
     conda create --name CenterNet python=3.6
+    conda create --name CenterNet python=3.8
     ~~~
     And activate the environment.
     
@@ -19,6 +20,7 @@ After install Anaconda:
 
     ~~~
     conda install pytorch=0.4.1 torchvision -c pytorch
+    pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
     ~~~
     
     And disable cudnn batch normalization(Due to [this issue](https://github.com/xingyizhou/pytorch-pose-hg-3d/issues/16)).
@@ -42,6 +44,20 @@ After install Anaconda:
     make
     python setup.py install --user
     ~~~
+    
+    If the make error occurs as follows, (https://github.com/cocodataset/cocoapi/issues/172)
+    ~~~
+    cc1: fatal error: pycocotools/_mask.c: No such file or directory
+    compilation terminated.
+    error: command 'gcc' failed with exit status 1
+    make: *** [Makefile:3: all] Error 1
+    ~~~
+    install Cython
+    ~~~
+    pip install Cython
+    ~~~
+
+
 
 3. Clone this repo:
 
@@ -58,11 +74,13 @@ After install Anaconda:
     ~~~
     
     
-5. Compile deformable convolutional (from [DCNv2](https://github.com/CharlesShang/DCNv2/tree/pytorch_0.4)).
+5. Compile deformable convolutional for torch version 2.1.0(from [DCNv2_latest](https://github.com/lucasjinreal/DCNv2_latest.git )).
 
     ~~~
+    rm -rf $CenterNet_ROOT/src/lib/models/networks/DCNv2
     cd $CenterNet_ROOT/src/lib/models/networks/DCNv2
-    ./make.sh
+    git clone https://github.com/lucasjinreal/DCNv2_latest.git DCNv
+    python3 setup.py build develop
     ~~~
 6. [Optional, only required if you are using extremenet or multi-scale testing] Compile NMS if your want to use multi-scale testing or test ExtremeNet.
 
